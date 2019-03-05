@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Tables Page</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+        <div class="container">
+                <div class="jumbotron"><h1 class="text-center"><span class="glyphicon glyphicon-fire"></span> Hot Plate Restaurant </h1>
+                    <hr>
+                    <h2 class="text-center">Current Reservations and Waiting List</h2>
+                    <div class="text-center">
+                        <a href="/reserve">
+                            <button type="button" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-credit-card"></span> Make Reservation</button>
+                    </a> 
+                     
+                        <a href="/"><button type="button" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-home"></span></button></a></div>
+                </div>
+                <div>
+                    <div class="row">
+                        <div class = "col-lg-12">
+                            <div class ="panel panel-default">
+                                <div class = "panel-heading" ><h4>Current Reservation</h4></div> 
+                                <div class="panel-body" id = "tablesection" ></div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>  
+                    <div class="row">
+                            <div class = "col-lg-12">
+                                <div class ="panel panel-default">
+                                    <div class = "panel-heading" ><h4>Wait List</h4></div> 
+                                    <div class="panel-body" id = "waitsection"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="footer">
+                            <div class="container">
+                               <p>Control Panel</p> Clear Table | API Table Link | API Wait List
+                               <p>
+                                   
+                               </p>
+                            </div>
+                        </footer>
+
+                        <!--end main container-->
+                        </div>  
+                        <script>
+                                $.get("/api/tables", function(data) {
+                                    console.log(data);
+                                    for (var i=0; i<data.length; i++) {
+                                        $("#tablesection").append(data[i].customerID);
+                                    };
+                                });
+                        
+                                $.get("/api/waitlist", function(data) {
+                                    console.log(data);
+                                    for (var j=0; j<data.length; j++) {
+                                        $("#waitsection").append(data[j].customerID);
+                                    }
+                                });
+                            </script>
+                </body>
+                </html>
